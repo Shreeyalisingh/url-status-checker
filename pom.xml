@@ -1,5 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
                              http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
@@ -8,11 +8,12 @@
   <artifactId>url-status-checker</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
+
   <name>url-status-checker</name>
   <url>http://maven.apache.org</url>
 
   <dependencies>
-    <!-- ✅ Use only JUnit 5 -->
+    <!-- ✅ JUnit 5 core dependency -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
@@ -22,33 +23,45 @@
   </dependencies>
 
   <build>
-  <plugins>
-    <!-- Plugin to specify main class for executable jar -->
-    <plugin>
-      <groupId>org.apache.maven.plugins</groupId>
-      <artifactId>maven-jar-plugin</artifactId>
-      <version>3.2.0</version>
-      <configuration>
-        <archive>
-          <manifest>
-            <addClasspath>true</addClasspath>
-            <mainClass>com.example.urlchecker.App</mainClass>
-          </manifest>
-        </archive>
-      </configuration>
-    </plugin>
+    <plugins>
 
-    <!-- Optional: Still keep the exec plugin if needed -->
-    <plugin>
-      <groupId>org.codehaus.mojo</groupId>
-      <artifactId>exec-maven-plugin</artifactId>
-      <version>3.1.0</version>
-      <configuration>
-        <mainClass>com.example.urlchecker.App</mainClass>
-      </configuration>
-    </plugin>
-  </plugins>
-</build>
+      <!-- ✅ Executable JAR with main class -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.2.0</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <mainClass>com.example.urlchecker.App</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
 
+      <!-- Optional: run app via `mvn exec:java` -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.1.0</version>
+        <configuration>
+          <mainClass>com.example.urlchecker.App</mainClass>
+        </configuration>
+      </plugin>
+
+      <!-- ✅ Surefire Plugin for JUnit 5 (NO additional provider needed) -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.2.5</version>
+        <configuration>
+          <includes>
+            <include>**/*Test.java</include>
+          </includes>
+        </configuration>
+      </plugin>
+
+    </plugins>
+  </build>
 </project>
-

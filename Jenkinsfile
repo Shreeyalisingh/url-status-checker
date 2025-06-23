@@ -2,12 +2,12 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven3' // Ensure 'Maven3' is configured in Jenkins Global Tools
+        maven 'Maven3'
     }
 
     environment {
         IMAGE_NAME = "url-checker-app"
-        DOCKERHUB_REPO = "shreeyali/url-checker-app" 
+        DOCKERHUB_REPO = "shreeyali/url-checker-app"
     }
 
     stages {
@@ -26,11 +26,6 @@ pipeline {
         stage('Run Unit Tests') {
             steps {
                 bat 'mvn test'
-            }
-        }
-
-        stage('Archive Test Results') {
-            steps {
                 junit 'target/surefire-reports/*.xml'
             }
         }
